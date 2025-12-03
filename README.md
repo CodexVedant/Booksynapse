@@ -1,4 +1,4 @@
-# AI-Book-Recommender
+#Booksynapse: AI-Powered-Sementic-Book-Recommender
 
 A complete Flask-based book recommendation system with hybrid recommendation engine (content-based filtering + collaborative filtering) using SentenceTransformers.
 
