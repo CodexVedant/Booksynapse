@@ -14,3 +14,11 @@ migrations/
 
 # IDE
 .vscode/
+
+# css & js
+static/* linguist-vendored
+templates/* linguist-vendored
+admin/* linguist-vendored
+recommender/* linguist-language=Python
+*.js linguist-vendored
+*.css linguist-vendored
