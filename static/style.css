@@ -1,0 +1,171 @@
+   body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f7fafc;
+    color: #1f2937;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.badge {
+    font-size: 0.9em;
+}
+
+/* Small helper: keep it neat */
+.navbar-brand {
+    font-weight: 600;
+}
+
+/* Book card styling */
+.card-title {
+    color: #333;
+    font-weight: 500;
+}
+
+.card-text.text-muted {
+    font-size: 0.9em;
+}
+
+.navbar .nav-link {
+    padding: 0.45rem 0.7rem;
+}
+.navbar .btn {
+    border-radius: 8px;
+}
+
+/* Hero card */
+.hero-wrapper { max-width: 1100px; margin-left: auto; margin-right: auto; }
+.hero-card {
+    background: linear-gradient(120deg, rgba(255,255,255,1) 0%, rgba(232,243,255,1) 100%);
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(16,24,40,0.06);
+    border: 1px solid rgba(16,24,40,0.03);
+    padding: 28px;
+}
+.hero-icon .icon-circle {
+    width: 64px; height: 64px; border-radius: 12px;
+    background: linear-gradient(180deg,#0f9d58,#0c7a42);
+    display:grid; place-items:center; color: #fff; font-size: 22px;
+    box-shadow: 0 6px 18px rgba(15,157,88,0.18);
+}
+.hero-title {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+    color: #0f9d58;
+}
+.hero-sub { margin-top: 6px; font-size: 15px; }
+
+/* feature pills */
+.hero-features .feature-pill {
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(255,255,255,0.7);
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 13px; color:#4b5563;
+    border: 1px solid rgba(16,24,40,0.03);
+}
+
+/* Tabs row */
+.tabs-row { max-width: 1100px; margin-left:auto; margin-right:auto; }
+.tab-card {
+    display:inline-flex; align-items:center; gap:12px;
+    min-width: 200px; max-width: 260px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    border: none;
+    box-shadow: 0 6px 16px rgba(15,23,42,0.03);
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    cursor: pointer;
+}
+.tab-card .tab-icon { width:32px; height:32px; display:grid; place-items:center; border-radius:8px; background:rgba(255,255,255,0.6); }
+.tab-card .tab-label { font-weight:600; font-size:14px; color:#111827; }
+
+/* Active tab */
+.tab-card.active {
+    background: #0f9d58;
+    color: #fff;
+    box-shadow: 0 10px 26px rgba(15,157,88,0.14);
+}
+.tab-card.active .tab-icon { background: rgba(255,255,255,0.12); color: #fff; }
+.tab-card:hover { transform: translateY(-3px); }
+
+/* Panel card */
+.panel-card { max-width: 1100px; margin-left:auto; margin-right:auto; }
+.panel { display:block; }
+.panel.d-none { display:none; }
+
+.panel h3 { margin-bottom:6px; }
+.panel p { margin-bottom: 10px; color: #6b7280; }
+
+/* textarea + buttons */
+#user-interests.form-control {
+    border-radius: 10px;
+    border: 1px solid #e6edf3;
+    min-height: 110px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+    resize: vertical;
+}
+
+/* CTA */
+.btn-pill {
+    border-radius: 999px !important;
+    padding: 12px 22px;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(15,157,88,0.12);
+}
+.btn-success.btn-pill {
+    background: #0f9d58;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+.btn-success.btn-pill:hover { filter: brightness(0.95); transform: translateY(-1px); }
+
+/* clear button styling */
+#clear-interests { min-width: 120px; }
+
+/* small red error message */
+.visually-hidden { display:none; }
+.text-danger.small { font-size: .85rem; }
+
+/* result cards soft style (keeps your existing .card enhancements) */
+.soft-card {
+    border-radius: 12px;
+    border: 1px solid rgba(16,24,40,0.03);
+    box-shadow: 0 6px 20px rgba(16,24,40,0.04);
+}
+
+/* mood chips */
+.mood-chip { border-radius: 999px; padding: 8px 14px; }
+
+/* responsive tweaks */
+@media (max-width: 991px) {
+    .hero-title { font-size: 28px; }
+    .tab-card { min-width: 48%; }
+    .tabs-row { gap: 10px; }
+}
+@media (max-width: 576px) {
+    .hero-card { padding: 18px; }
+    .tab-card { width: 100%; min-width: unset; }
+    .tabs-row { display:flex; flex-direction:column; }
+    .btn-pill { font-size: 15px; }
+}
+
+/* Small accessibility / focus styles for keyboard users */
+.tab-card:focus {
+    outline: 3px solid rgba(15,157,88,0.18);
+    outline-offset: 3px;
+}
+
+/* Minor utility (keeps .soft-card + existing .card consistent) */
+.soft-card .card-body { padding: 1.1rem; }
+
+/* Ensure hero & UI center nicely on very wide screens */
+@media (min-width: 1400px) {
+    .hero-wrapper, .tabs-row, .panel-card { max-width: 1200px; }
+}

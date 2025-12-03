@@ -1,0 +1,16 @@
+# Python env / cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets / config
+.env
+instance/
+
+# DB / migrations (optional)
+*.sqlite3
+migrations/
+
+# IDE
+.vscode/

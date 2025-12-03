@@ -1,0 +1,54 @@
+{% extends "admin_base.html" %}
+
+{% block page_title %}{% if book %}Edit Book{% else %}Add Book{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{% if book %}Edit Book{% else %}Add New Book{% endif %}</h3>
+            </div>
+            <form method="POST">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{% if book %}{{ book.title }}{% endif %}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author *</label>
+                        <input type="text" class="form-control" id="author" name="author" value="{% if book %}{{ book.author }}{% endif %}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="5">{% if book %}{{ book.description or '' }}{% endif %}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="genres">Genres (semicolon-separated)</label>
+                        <input type="text" class="form-control" id="genres" name="genres" value="{% if book %}{{ book.genres or '' }}{% endif %}" placeholder="Fiction; Mystery; Thriller">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="year">Publication Year</label>
+                                <input type="number" class="form-control" id="year" name="year" value="{% if book and book.year %}{{ book.year }}{% endif %}" min="1000" max="2100">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="language">Language</label>
+                                <input type="text" class="form-control" id="language" name="language" value="{% if book %}{{ book.language or '' }}{% endif %}" placeholder="en">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">{% if book %}Update{% else %}Add{% endif %} Book</button>
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-default">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

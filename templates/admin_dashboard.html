@@ -1,0 +1,161 @@
+{% extends "admin_base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Stats boxes -->
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{ stats.books_count }}</h3>
+                <p>Total Books</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-book"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ stats.users_count }}</h3>
+                <p>Total Users</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ stats.ratings_count }}</h3>
+                <p>Total Ratings</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>{{ stats.uploads_count }}</h3>
+                <p>CSV Uploads</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-file-csv"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Quick Actions</h3>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('admin.add_book') }}" class="btn btn-primary btn-block mb-2">
+                    <i class="fas fa-plus"></i> Add New Book
+                </a>
+                <a href="{{ url_for('admin.upload_csv') }}" class="btn btn-success btn-block mb-2">
+                    <i class="fas fa-upload"></i> Upload CSV
+                </a>
+                <form method="POST" action="{{ url_for('admin.retrain_model') }}" class="d-inline">
+                    <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('This may take several minutes. Continue?')">
+                        <i class="fas fa-sync"></i> Retrain Model
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="card-title">Search Books</h3>
+            </div>
+            <div class="card-body">
+                <form method="GET" action="{{ url_for('admin.dashboard') }}" class="d-flex">
+                    <input type="text" name="q" class="form-control me-2" placeholder="Search by title, author, genres" value="{{ query }}">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Recent Books</h3>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in recent_books %}
+                        <tr>
+                            <td>{{ book.title[:50] }}{% if book.title|length > 50 %}...{% endif %}</td>
+                            <td>{{ book.author }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.edit_book', book_id=book.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <form method="POST" action="{{ url_for('admin.delete_book', book_id=book.id) }}" class="d-inline" onsubmit="return confirm('Delete this book?')">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if query %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Search Results{% if search_results %} ({{ search_results|length }}){% endif %}</h3>
+            </div>
+            <div class="card-body p-0">
+                {% if search_results %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in search_results %}
+                        <tr>
+                            <td>{{ book.title[:80] }}{% if book.title|length > 80 %}...{% endif %}</td>
+                            <td>{{ book.author }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.edit_book', book_id=book.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <form method="POST" action="{{ url_for('admin.delete_book', book_id=book.id) }}" class="d-inline" onsubmit="return confirm('Delete this book?')">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="p-3">No books found for "{{ query }}".</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
